@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | SME Financial Toolkit</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
+        color: #333;
+      }
+
+      header {
+        background: #4f46e5;
+        color: white;
+        padding: 1rem 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      header h1 {
+        font-size: 1.5rem;
+        margin: 0;
+      }
+
+      nav a {
+        color: white;
+        margin: 0 0.5rem;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      nav a.active,
+      nav a:hover {
+        text-decoration: underline;
+      }
+
+      main {
+        padding: 2rem;
+      }
+
+      .section-header h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: #4f46e5;
+      }
+
+      .cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .card {
+        background: white;
+        flex: 1 1 200px;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        text-align: center;
+      }
+
+      .card span {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        color: #666;
+      }
+
+      .card strong {
+        font-size: 1.25rem;
+        color: #111;
+      }
+
+      .ai-insights {
+        background: #eef2ff;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .ai-insights h2 {
+        margin-bottom: 1rem;
+      }
+
+      .ai-insights ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+      }
+
+      .ai-insights li {
+        margin-bottom: 0.75rem;
+      }
+
+      .chart-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .chart-card {
+        background: white;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+
+      .chart-card h3 {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        color: #333;
+      }
+
+      footer {
+        text-align: center;
+        padding: 1.5rem;
+        background: #f0f0f0;
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 2rem;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+   <header>
+  <h1>SME Financial Toolkit</h1>
+  <div style="display: flex; align-items: center; margin-left: auto;">
+    <nav style="margin-right: 1.5rem;">
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="budgeting.html">Budgeting</a>
+      <a href="funding.html">Funding</a>
+      <a href="reports.html">Reports</a>
+      <a href="forecasting.html">Forecasting</a>
+    </nav>
+    <div class="profile-dropdown">
+      <button id="profileBtn">
+        <span style="margin-right:6px;">👤</span> Profile ▼
+      </button>
+      <div id="dropdownMenu" class="dropdown-content">
+        <a href="profile.html">View Profile</a>
+        <a href="index.html">Logout</a>
+      </div>
+    </div>
+    </header>
+    <!-- ...existing code... -->
+    <style>
+      /* ...existing code... */
+      .profile-dropdown {
+        position: relative;
+        display: inline-block;
+        margin-left: auto;
+      }
+
+      #profileBtn {
+        background: #4f46e5;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.4rem;
+        cursor: pointer;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: background 0.2s;
+      }
+
+      #profileBtn:hover {
+        background: #3730a3;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background: white;
+        min-width: 150px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border-radius: 0.4rem;
+        z-index: 10;
+        margin-top: 0.5rem;
+        overflow: hidden;
+      }
+
+      .dropdown-content a {
+        color: #333;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        display: block;
+        font-size: 1rem;
+        transition: background 0.2s;
+      }
+
+      .dropdown-content a:hover {
+        background: #eef2ff;
+      }
+      /* ...existing code... */
+    </style>
+    <script>
+      // ...existing code...
+      document.addEventListener("DOMContentLoaded", function () {
+        const btn = document.getElementById("profileBtn");
+        const menu = document.getElementById("dropdownMenu");
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          menu.style.display =
+            menu.style.display === "block" ? "none" : "block";
+        });
+        document.addEventListener("click", function () {
+          menu.style.display = "none";
+        });
+      });
+      // ...existing code...
+    </script>
+
+    <main>
+      <section class="section-header">
+        <h2>Dashboard Overview</h2>
+      </section>
+
+      <section class="cards">
+        <div
+          class="card"
+          onclick="window.location.href='cash-details.html'"
+          style="cursor: pointer"
+        >
+          <span>Cash Balance</span><strong>₹1,85,000</strong>
+        </div>
+        <div class="card">
+          <span>Monthly Revenue</span><strong>₹80,000</strong>
+        </div>
+        <div class="card">
+          <span>Monthly Expenses</span><strong>₹55,000</strong>
+        </div>
+        <div class="card"><span>Net Profit</span><strong>₹25,000</strong></div>
+      </section>
+
+      <section class="ai-insights">
+        <h2>📊 AI Insights</h2>
+        <ul>
+          <li>
+            Revenue has shown a steady 7% month-on-month growth. Consider
+            reinvesting profits in marketing for further acceleration.
+          </li>
+          <li>
+            Expenses are rising linearly—alert: monitor operational costs
+            especially salaries and logistics.
+          </li>
+          <li>
+            Cash balance is positive and growing. You can safely explore
+            expansion or investment options next quarter.
+          </li>
+          <li>
+            Sales peaked in June. Investigate what promotions or customer
+            segments drove this surge for repeatability.
+          </li>
+        </ul>
+      </section>
+
+      <section class="chart-grid">
+        <div class="chart-card">
+          <h3>Sales History</h3>
+          <canvas id="salesChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Revenue</h3>
+          <canvas id="revenueChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Expenses</h3>
+          <canvas id="expenseChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Cash Balance</h3>
+          <canvas id="cashBalanceChart"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Finnacle. All rights reserved.</p>
+      <p>Empowering financial decisions for SMEs.</p>
+    </footer>
+
+    <script>
+      const chartOptions = {
+        responsive: true,
+        plugins: {
+          legend: { display: true },
+          tooltip: { mode: "index", intersect: false },
+        },
+        scales: { y: { beginAtZero: true } },
+      };
+
+      const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+
+      new Chart(document.getElementById("salesChart"), {
+        type: "bar",
+        data: {
+          labels: months,
+          datasets: [
+            {
+              label: "Units Sold",
+              data: [120, 135, 150, 145, 160, 175],
+              backgroundColor: "#4caf50",
+            },
+          ],
+        },
+        options: chartOptions,
+      });
+
+      new Chart(document.getElementById("revenueChart"), {
+        type: "line",
+        data: {
+          labels: months,
+          datasets: [
+            {
+              label: "Revenue (₹)",
+              data: [70000, 75000, 80000, 85000, 90000, 95000],
+              borderColor: "#2a7ae2",
+              fill: false,
+            },
+          ],
+        },
+        options: chartOptions,
+      });
+
+      new Chart(document.getElementById("expenseChart"), {
+        type: "line",
+        data: {
+          labels: months,
+          datasets: [
+            {
+              label: "Expenses (₹)",
+              data: [40000, 42000, 43000, 45000, 47000, 50000],
+              borderColor: "#f44336",
+              fill: false,
+            },
+          ],
+        },
+        options: chartOptions,
+      });
+
+      new Chart(document.getElementById("cashBalanceChart"), {
+        type: "line",
+        data: {
+          labels: months,
+          datasets: [
+            {
+              label: "Cash Balance (₹)",
+              data: [25000, 28000, 31000, 35000, 38000, 42000],
+              borderColor: "#ff9800",
+              backgroundColor: "rgba(255, 152, 0, 0.2)",
+              fill: true,
+            },
+          ],
+        },
+        options: chartOptions,
+      });
+    </script>
+  </body>
+</html>
